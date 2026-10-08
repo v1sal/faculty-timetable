@@ -1,1 +1,10 @@
-import {readFile,mkdir,writeFile} from 'node:fs/promises';import {build} from 'esbuild';const html=await readFile('src/index.html','utf8');await mkdir('public',{recursive:true});await writeFile('public/index.html',html);await build({entryPoints:['src/app.js'],outfile:'public/app.js',bundle:true,format:'iife',target:'es2022',minify:true});console.log('Built public/index.html and public/app.js for Vercel.');
+import {readFile,mkdir,writeFile,cp} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {build} from 'esbuild';
+await mkdir('public',{recursive:true});
+await cp('src/assets','public/assets',{recursive:true});
+await build({entryPoints:['src/app.js'],outfile:'public/app.js',bundle:true,format:'iife',target:'es2022',minify:true});
+const version=createHash('sha256').update(await readFile('public/app.js')).digest('hex').slice(0,12);
+const html=(await readFile('src/index.html','utf8')).replace('src="/app.js"','src="/app.js?v='+version+'"');
+await writeFile('public/index.html',html);
+console.log('Built university timetable with bundled logo and versioned JavaScript.');
