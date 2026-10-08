@@ -6,7 +6,7 @@ LMS-style professor schedules with a separate admin sign-in. No example names or
 
 Import this repository into Vercel. Use Framework Preset **Other**, Build Command **npm run build**, and Output Directory **public**. These defaults are also declared in vercel.json. Clear any conflicting Project Settings overrides. The API function in api/config.js serves the public Supabase connection settings; the browser reads and writes through Supabase's authenticated Data API.
 
-Add these Vercel environment variables for each environment you use, then redeploy:
+The supplied Supabase project URL and publishable key are configured in config/supabase-public.js. These values are safe for browser use and do not grant admin rights. No Vercel environment variables are required for this project connection. To use another Supabase project, override both values with these Vercel environment variables and redeploy:
 
 - SUPABASE_URL: your Supabase project URL.
 - SUPABASE_PUBLISHABLE_KEY: the project's publishable key (a legacy anon key also works).
@@ -46,4 +46,4 @@ Tests run real PostgreSQL in memory through PGlite, including RLS/grants for ano
 
 Everyone can view the published timetable. Only members of timetable_admins can insert, update, or delete classes. PostgreSQL RLS enforces this even when a visitor bypasses the page and calls Supabase directly. A private reservation table and a database exclusion constraint prevent simultaneous professor, room, or group conflicts. Supabase Auth maintains sign-in sessions; the former Sites authentication headers are not used.
 
-Production verification still requires applying the schema to your selected Supabase project and configuring Vercel's environment variables. Local tests do not confirm your remote project settings.
+Production verification still requires applying the schema to your selected Supabase project and checking the deployed public connection settings. Local tests do not confirm your remote project settings.
