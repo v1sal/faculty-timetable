@@ -1,0 +1,1 @@
+{"name":"faculty-timetable","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test scripts/test.mjs"}}
