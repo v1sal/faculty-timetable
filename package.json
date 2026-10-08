@@ -1,1 +1,16 @@
-{"name":"faculty-timetable","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test scripts/test.mjs"}}
+{
+  "name": "faculty-timetable",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test scripts/postgres.test.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "@electric-sql/pglite": "0.5.8"
+  }
+}

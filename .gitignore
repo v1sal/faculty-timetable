@@ -1,4 +1,8 @@
-dist/
 node_modules/
-.wrangler/
+public/
+dist/
+.env
+.env.*
+!.env.example
+.vercel/
 *.tar.gz
